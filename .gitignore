@@ -3,3 +3,4 @@ venv/
 *.pdf
 .pytest_cache
 __pycache__/
+.coverage
