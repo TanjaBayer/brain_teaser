@@ -5,4 +5,4 @@ install: pip install -r requirements.txt
 script:
   - pytest  --cov-report term --cov=tests/
 after_sucess:
-  -codecov
+  - codecov
