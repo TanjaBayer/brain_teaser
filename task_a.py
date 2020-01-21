@@ -18,8 +18,6 @@ def run_sequence(m, n):
 
     return n - start_val - 1
 
-
-
 if __name__ == '__main__':
     # assuming we should calculate the steps for a single but not fixed value of m and a variable n
     # reading in from terminal
