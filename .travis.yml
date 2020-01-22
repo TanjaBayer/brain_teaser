@@ -3,6 +3,6 @@ python:
   - "3.8.1"
 install: pip install -r requirements.txt
 script:
-  - pytest  --cov-report term --cov=tests/
+  - pytest --cov-report term --cov=./
 after_sucess:
   - codecov
