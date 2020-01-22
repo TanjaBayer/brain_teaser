@@ -1,6 +1,6 @@
 from pytictoc import TicToc
 
-from task_a import calc_sequence, run_sequence
+from .task_a import calc_sequence, run_sequence
 
 
 def run_sequence_with_buffer(m, buffer):
