@@ -1,6 +1,7 @@
 from pytictoc import TicToc
 from joblib import Parallel, delayed
 
+
 from task_a import calc_sequence, run_sequence
 
 
@@ -22,36 +23,29 @@ def run_sequence_with_buffer(m, buffer):
 
 
 if __name__ == '__main__':
-    # Using the functions written in task_a because duplicated code is not nice ;)
-    timer = TicToc()
-
-    timer.tic()  # Start the timer
-    for value_m in range(1, 10001):
-        print("Steps required for m - %s : %s" % (value_m, run_sequence(value_m)))
-    time_b = timer.tocvalue()  # Stop the timer and store value
-
-    timer.tic()  # Start the timer
-    buffer = {}
-    for value_m in range(1, 10001):
-        print("Steps required for m - %s : %s" % (value_m, run_sequence_with_buffer(value_m, buffer)))
-
-    time_c = timer.tocvalue()  # Stop the timer and store value
-
-    print("Time for version from task b: % and task_c %s" % (time_b, time_c))
-
-    if time_c < time_b:
-        print("Success calculation time improved")
-
-    timer = TicToc()
     m_values = range(1, 10001)
+    timer = TicToc()
+
+    # Calculate time of the calculation of step b
+    timer.tic()  # Start the timer
+    [run_sequence(m) for m in m_values]
+    print("Time for calulation of task b: %s" % timer.tocvalue())  # Stop the timer and store value
+
+    # Run the same job in parallel on multiple cpus, normaly that should minimize the normal
+    # calculation time, but in this case it seams to generate more overhead
     timer.tic()
     arr = Parallel(n_jobs=-1)(delayed(run_sequence)(m) for m in m_values)
-    print(timer.tocvalue())
-    print(arr)
+    print("Time for calulation of task b with parallel jobs: %s" % timer.tocvalue())
 
-    timer = TicToc()
+    # Store already known sequence and number of steps in a buffer which can be used in later steps
     timer.tic()  # Start the timer
+    buffer = {}
+    [run_sequence_with_buffer(m, buffer) for m in m_values]
+    print("Time for calulation of improved version: %s" % timer.tocvalue())  # Stop the timer and
+    # store value
 
-    steps = [run_sequence(m) for m in m_values]
-    print(timer.tocvalue())  # Stop the timer and store value
-    print(steps)
+    # Try parallel jobs for speedup implementation
+    timer.tic()
+    Parallel(n_jobs=-1, require="sharedmem")(delayed(run_sequence_with_buffer)(m, buffer) for m
+                                               in m_values)
+    print("Time for calulation of improved version with parallel jobs: %s" % timer.tocvalue())
