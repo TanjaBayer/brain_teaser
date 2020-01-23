@@ -1,5 +1,5 @@
 from pytictoc import TicToc
-from .task_a import run_sequence
+from task_a import run_sequence
 
 if __name__ == '__main__':
     # Using the functions written in task_a because duplicated code is not nice ;)

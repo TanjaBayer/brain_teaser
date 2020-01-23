@@ -1,5 +1,14 @@
 
 def calc_sequence(m, old_val):
+    """ Calc the next value based on the last value and the start value
+
+    Args:
+        m:  The start value of the sequence
+        old_val: The last value
+
+    Returns:
+        The new calculated value
+    """
     if not old_val:
         return m
     if old_val % 2:
@@ -8,6 +17,14 @@ def calc_sequence(m, old_val):
 
 
 def run_sequence(m):
+    """ For a given m run the sequence until 1 is reached fo the first time
+
+    Args:
+        m: The start value of the sequence
+
+    Returns:
+        The steps required to reach 1 for the first time
+    """
     result = None
     n = 1
     while result != 1:

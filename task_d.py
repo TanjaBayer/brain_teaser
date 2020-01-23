@@ -1,8 +1,5 @@
 from pytictoc import TicToc
-import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-
 
 from task_a import run_sequence
 
