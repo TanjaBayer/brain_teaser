@@ -6,6 +6,18 @@ from task_a import calc_sequence, run_sequence
 
 
 def run_sequence_with_buffer(m, buffer):
+    """ Run the sequence but store the start value and the steps required in a buffer
+
+    This buffer can be used further steps to stop the processing when the value is reached,
+    because the required steps are than already known
+
+    Args:
+        m: start value of the sequence
+        buffer: the buffer for storing the value, step pairs
+
+    Returns:
+        the steps require to reach 1 for the first time
+    """
     result = calc_sequence(m, None)
     old_val = None
     n = 1
