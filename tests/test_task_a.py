@@ -1,6 +1,6 @@
 import pytest
 
-from ..task_a import calc_sequence, run_sequence
+from task_a import calc_sequence, run_sequence
 
 
 @pytest.mark.parametrize("m", [1, 1000, 50])

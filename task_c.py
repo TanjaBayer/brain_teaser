@@ -1,6 +1,7 @@
 from pytictoc import TicToc
+from joblib import Parallel, delayed
 
-from .task_a import calc_sequence, run_sequence
+from task_a import calc_sequence, run_sequence
 
 
 def run_sequence_with_buffer(m, buffer):
@@ -40,3 +41,17 @@ if __name__ == '__main__':
 
     if time_c < time_b:
         print("Success calculation time improved")
+
+    timer = TicToc()
+    m_values = range(1, 10001)
+    timer.tic()
+    arr = Parallel(n_jobs=-1)(delayed(run_sequence)(m) for m in m_values)
+    print(timer.tocvalue())
+    print(arr)
+
+    timer = TicToc()
+    timer.tic()  # Start the timer
+
+    steps = [run_sequence(m) for m in m_values]
+    print(timer.tocvalue())  # Stop the timer and store value
+    print(steps)
