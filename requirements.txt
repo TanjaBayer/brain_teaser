@@ -3,3 +3,4 @@ pytest-cov
 codecov
 pytictoc
 matplotlib
+joblib
