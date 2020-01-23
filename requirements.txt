@@ -2,6 +2,4 @@ pytest
 pytest-cov
 codecov
 pytictoc
-sklearn
-Cython
 matplotlib
